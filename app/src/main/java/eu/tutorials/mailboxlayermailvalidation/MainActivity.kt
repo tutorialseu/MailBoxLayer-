@@ -22,34 +22,19 @@ class MainActivity : ComponentActivity() {
             MailBoxLayerMailValidationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                   //Todo 2: Remove call to Greeting Function Greeting("Android")
+
                 }
             }
         }
     }
 }
 
-/* Todo 1: remove Greeting Function and create a new composable
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
- */
 
-//Todo 4: create EmailScreen composable function
 @Composable
 fun EmailScreen(
-    //Todo 6: To track the entered characters for OutlineTextField we create a String to hold the value
-    //and a lambda function with String parameter
-    value: String,
+   value: String,
                 onValueChange: (String) -> Unit={},
-    //Todo 10: Create a lambda function for the button Onclick which will be implemented later
     onButtonClicked:()->Unit={}) {
-    /** Todo 5:Add a Column as the parent layout to align children elements
-     *    vertically on the screen. Using the Modifier set the Column to fillMaxsize that is
-     *    fill both horizontal and vertical sides of the screen. align the children to the center
-     *    vertically using verticalArrangement and also horizontally using horizontalAlignment
-     * */
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,18 +42,8 @@ fun EmailScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        /** Todo 7: Add the input field with value in EmailScreen parameter
-         *    assigned as value argument and the onValueChange as onValueChange argument
-         */
         OutlinedTextField(value = value, onValueChange = onValueChange)
-        /**Todo 9: Add the Text element for showing the Status of an email, whether it is valid or not
-         *  For now we set a default argument to the text which will be updated later and set a vertical
-         *  padding to add an 8dp of space above and below the Text.
-         */
         Text(text = "Invalid Email", modifier = Modifier.padding(vertical = 8.dp))
-        /**Todo 11: Add OutlinedButton to be click to check an email, set onButtonClicked which we created
-         * as its onCLick parameter and within its block add a Text with tex set to "Check Email"
-         * */
         OutlinedButton(onClick = onButtonClicked) {
             Text(text = "Check Email")
         }
@@ -79,8 +54,6 @@ fun EmailScreen(
 @Composable
 fun DefaultPreview() {
     MailBoxLayerMailValidationTheme {
-        //Todo 3: Remove call to Greeting Function Greeting("Android")
-
-        EmailScreen(value = "")//Todo 8 add EmailScreen to DefaultPreview
+        EmailScreen(value = "")
     }
 }
