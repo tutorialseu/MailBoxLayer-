@@ -2,11 +2,18 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
+//Todo 2: initialize Properties and read local.properties
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 31
 
     defaultConfig {
+
+        //Todo 3: Now we get the api Key from the properties and add it to build configuration
+        buildConfigField "String", "API_KEY", "${properties.getProperty('API_KEY')}"
+
         applicationId "eu.tutorials.mailboxlayermailvalidation"
         minSdk 21
         targetSdk 31
