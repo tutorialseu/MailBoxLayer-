@@ -24,7 +24,7 @@ class MailBoxState(
         try {
             coroutineScope.launch {
                 response.value =
-                    Api.authService.checkEmail(email = emailState, key = Api.API_KEY)
+                    Api.service.checkEmail(email = emailState, key = Api.API_KEY)
                 Log.d("email2","${response.value}")
                 valid.value = if (response.value.format_valid) "Email is valid" else "Invalid email"
             }

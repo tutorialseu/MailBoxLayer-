@@ -24,6 +24,7 @@ object Api {
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
+
     private val logging = HttpLoggingInterceptor()
     private val httpClient = OkHttpClient.Builder().apply {
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -37,5 +38,5 @@ object Api {
         .client(httpClient)
         .build()
 
-    val authService: MailBoxService by lazy { retrofit.create(MailBoxService::class.java) }
+    val service: MailBoxService by lazy { retrofit.create(MailBoxService::class.java) }
 }
