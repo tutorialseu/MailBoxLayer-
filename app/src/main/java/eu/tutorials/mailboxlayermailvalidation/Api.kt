@@ -13,7 +13,8 @@ import retrofit2.http.Query
 interface MailBoxService{
     /** Todo 5: We create a suspend function with Get annotation having the patch check within it.
      * In the Function parameter we add the 2 queries, one for access_key and the other for email.
-     *
+     * The function returns Email Response which is the data class representing the Json response
+     * resulting from the request
      * */
     @GET("check")
     suspend fun checkEmail(@Query("access_key") key:String,
