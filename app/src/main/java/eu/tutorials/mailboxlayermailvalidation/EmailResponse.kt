@@ -1,6 +1,5 @@
 package eu.tutorials.mailboxlayermailvalidation
 
-//Todo 3: create a data class to map the expected Json Response and set default value for each field
 data class EmailResponse(val email : String="",
                          val did_you_mean : String="",
                          val user : String="",
