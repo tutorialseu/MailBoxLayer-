@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eu.tutorials.mailboxlayermailvalidation">
-<!-- Todo 13 add internet permission to allow app connect to the internet-->
+<!-- Todo 14 add internet permission to allow app connect to the internet-->
     <uses-permission android:name="android.permission.INTERNET"/>
 
-<!-- Todo 14   Because we are using http for the url we set  android:usesCleartextTraffic="true" in application tag-->
+<!-- Todo 15   Because we are using http for the url we set  android:usesCleartextTraffic="true" in application tag-->
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"

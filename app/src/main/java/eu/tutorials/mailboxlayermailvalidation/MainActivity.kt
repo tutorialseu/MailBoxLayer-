@@ -1,6 +1,7 @@
 package eu.tutorials.mailboxlayermailvalidation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -46,9 +47,14 @@ class MainActivity : ComponentActivity() {
                             appState.checkEmail(emailState = emailState)
                         }
                     }, state = appState)
+
                 }
             }
+
+            //Todo 13: set a Log to see the complete response on the logcat
+            Log.d("email","${response.value}")
         }
+
     }
 }
 
