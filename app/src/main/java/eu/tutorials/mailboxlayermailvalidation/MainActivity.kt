@@ -84,7 +84,9 @@ fun EmailScreen(
         /**Todo 11: Add OutlinedButton to be click to check an email, set onButtonClicked which we created
          * as its onCLick parameter and within its block add a Text with tex set to "Check Email"
          * */
-
+        OutlinedButton(onClick = onButtonClicked) {
+            Text(text = "Check Email")
+        }
     }
 }
 
