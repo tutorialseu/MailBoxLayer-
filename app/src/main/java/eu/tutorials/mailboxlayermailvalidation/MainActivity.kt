@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import eu.tutorials.mailboxlayermailvalidation.ui.theme.MailBoxLayerMailValidationTheme
@@ -61,17 +62,29 @@ fun EmailScreen(
          *    assigned as value argument and the onValueChange as onValueChange argument
          */
         OutlinedTextField(value = value, onValueChange = onValueChange)
-        /**Todo 9: Add the Text element for showing the Status of an email, whether it is valid or not
-         *  For now we set a default argument to the text which will be updated later and set a vertical
+        /**Todo 9: Add a column with three Text element for showing different Status of an email, whether it is valid or not,
+         * the score strength, if the email is free, exits, disposable and also if the domain
+         * is configured to receive email
+         *  For now we set a default value to the text which will be updated later with result from
+         *  the network call and set a vertical
          *  padding to add an 8dp of space above and below the Text.
          */
-        Text(text = "Invalid Email", modifier = Modifier.padding(vertical = 8.dp))
+        Column(verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Validity and score", modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold)
+            Text(
+                text = " Free and Disposable",
+                modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold
+            )
+
+            Text(
+                text = "Exists and Can Receive Email ",
+                modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold
+            )
+        }
         /**Todo 11: Add OutlinedButton to be click to check an email, set onButtonClicked which we created
          * as its onCLick parameter and within its block add a Text with tex set to "Check Email"
          * */
-        OutlinedButton(onClick = onButtonClicked) {
-            Text(text = "Check Email")
-        }
+
     }
 }
 
