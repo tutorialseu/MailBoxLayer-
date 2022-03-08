@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import eu.tutorials.mailboxlayermailvalidation.ui.theme.MailBoxLayerMailValidationTheme
@@ -43,7 +44,18 @@ fun EmailScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(value = value, onValueChange = onValueChange)
-        Text(text = "Invalid Email", modifier = Modifier.padding(vertical = 8.dp))
+        Column(verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally){
+            Text(text = "Validity and score", modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold)
+            Text(
+                text = " Free and Disposable",
+                modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold
+            )
+
+            Text(
+                text = "Exists and Can Receive Email ",
+                modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold
+            )
+        }
         OutlinedButton(onClick = onButtonClicked) {
             Text(text = "Check Email")
         }
