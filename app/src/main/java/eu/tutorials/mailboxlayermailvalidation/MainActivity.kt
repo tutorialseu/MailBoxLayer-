@@ -12,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import eu.tutorials.mailboxlayermailvalidation.ui.theme.MailBoxLayerMailValidationTheme
@@ -74,9 +75,24 @@ fun EmailScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(value = value, onValueChange = onValueChange)
-        Text(
-            //Todo 8: update the validity text using the valid value for the State class
-            text = state.valid.collectAsState().value, modifier = Modifier.padding(vertical = 8.dp))
+        Column(verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally) {
+            //Todo 8: update the value of each text according to the result from the State class
+            Text(
+                text = "${state.valid.collectAsState().value}  ${state.score.collectAsState().value}",
+                modifier = Modifier.padding(vertical = 8.dp),fontWeight = FontWeight.ExtraBold
+            )
+            Text(
+                text = "${state.free.collectAsState().value}  ${state.disposable.collectAsState().value}",
+                modifier = Modifier.padding(vertical = 8.dp),fontWeight = FontWeight.ExtraBold
+            )
+
+            Text(
+                text = "${state.smtpCheck.collectAsState().value} ${state.mxRecord.collectAsState().value} ",
+                modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold
+            )
+
+
+        }
         OutlinedButton(onClick = onButtonClicked) {
             Text(text = "Check Email")
         }

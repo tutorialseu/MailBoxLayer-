@@ -32,14 +32,35 @@ class MailBoxState(private val coroutineScope: CoroutineScope) {
     val response:StateFlow<EmailResponse>
     get() = _response
 
-    /** Todo 3: create a MutableStateFlow variable for setting the validity response and StateFlow
-     *   that is not mutable for exposing  the validity to the UI. With StateFlow, UI elements can
+    /** Todo 3: create a MutableStateFlow variable for setting each status response and StateFlow
+     *   that is not mutable for exposing each status to the UI. With StateFlow, UI elements can
      *   react to changes to data and recompose to update the value
      * */
+    //start
     private val _valid  = MutableStateFlow("")
     val valid:StateFlow<String>
     get() = _valid
 
+    private val _smtpCheck  = MutableStateFlow("")
+    val smtpCheck: StateFlow<String>
+        get() = _smtpCheck
+
+    private val _disposable  = MutableStateFlow("")
+    val disposable: StateFlow<String>
+        get() = _disposable
+
+    private val _free = MutableStateFlow("")
+    val free: StateFlow<String>
+        get() = _free
+
+    private val _score = MutableStateFlow("")
+    val score: StateFlow<String>
+        get() = _score
+
+    private val _mxRecord = MutableStateFlow("")
+    val mxRecord: StateFlow<String>
+        get() = _mxRecord
+//end
     /** Todo 4: A function that receives the email to be checked. Using the coroutineScope, we launch
      *   the suspend function from the service class within a try catch block to check the email state.
      *   We pass in emailState as argument for email and the api key as argument for key and set the response returned
@@ -52,12 +73,17 @@ class MailBoxState(private val coroutineScope: CoroutineScope) {
                 _response.value =
                     Api.service.checkEmail(email = emailState, key = Api.API_KEY)
                 Log.d("email2","${response.value}")
-                /** Todo 5: In the EmailResponse class we have a format_valid property that returns a boolean.
-                 *  We check if this is true we know the format is valid but if it is false
-                 *  which is the default that we have set, then it is invalid.
-                 *  We set this result to _valid state variable
+                /** Todo 5:
+                 *  We check for each status from the response class and if
+                 *  true we know that the email passed the check and if it is false
+                 *  then the email did pass, We set a text to show a clear message for each each status
                  * */
                 _valid.value = if (response.value.format_valid) "Email is valid" else "Invalid email"
+                _smtpCheck.value = if (response.value.smtp_check) "Email exists" else "Email does not exist"
+                _disposable.value = if (response.value.disposable) "Email is Disposable" else "Email is not disposable"
+                _free.value = if (response.value.free) "Email is Free" else "Email is paid"
+                _mxRecord.value = if (response.value.mx_found) "domain can receive email" else "domain cannot receive email"
+                _score.value = "Score is ${response.value.score}"
             }
         }catch (e: Exception){
 
