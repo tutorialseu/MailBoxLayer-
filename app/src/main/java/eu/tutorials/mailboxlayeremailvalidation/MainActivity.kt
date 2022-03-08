@@ -5,15 +5,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import eu.tutorials.mailboxlayeremailvalidation.ui.theme.MailBoxLayerEmailValidationTheme
@@ -24,8 +22,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val appState = rememberMailBoxState()
-            val response  =
-                appState.response.collectAsState()
 
             var emailState by remember {
                 mutableStateOf("")
@@ -43,8 +39,6 @@ class MainActivity : ComponentActivity() {
 
                 }
             }
-            Log.d("email","${response.value}")
-            Log.d("emailvalid","${response.value.format_valid}")
 
         }
     }
@@ -60,7 +54,24 @@ fun EmailUI(value: String,
         .padding(8.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
 
         OutlinedTextField(value = value, onValueChange = onValueChange)
-            Text(text = state.valid.collectAsState().value, modifier = Modifier.padding(vertical = 8.dp))
+        Column(verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally) {
+
+            Text(
+                text = "${state.valid.collectAsState().value}  ${state.score.collectAsState().value}",
+                modifier = Modifier.padding(vertical = 8.dp),fontWeight = FontWeight.ExtraBold
+            )
+            Text(
+                text = "${state.free.collectAsState().value}  ${state.disposable.collectAsState().value}",
+                modifier = Modifier.padding(vertical = 8.dp),fontWeight = FontWeight.ExtraBold
+            )
+
+            Text(
+                text = "${state.smtpCheck.collectAsState().value} ${state.mxRecord.collectAsState().value} ",
+                modifier = Modifier.padding(vertical = 8.dp), fontWeight = FontWeight.ExtraBold
+            )
+
+
+        }
         OutlinedButton(onClick = onButtonClicked) {
         Text(text = "Check Email")
         }
